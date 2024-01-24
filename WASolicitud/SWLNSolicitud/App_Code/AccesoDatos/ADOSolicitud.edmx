@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="SOLICITUDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="SSolicitudes">
+          <Key>
+            <PropertyRef Name="Solicitud_ID" />
+          </Key>
+          <Property Name="Solicitud_ID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FechaSolicitud" Type="date" Nullable="false" />
+          <Property Name="TipoSolicitud" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Estado" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ID_Usuario" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="SUsuarios">
+          <Key>
+            <PropertyRef Name="Usuario_ID" />
+          </Key>
+          <Property Name="Usuario_ID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Apellido" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="N_Identificación_Matricula" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Rol" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Telefono" Type="varchar" MaxLength="50" />
+          <Property Name="CorreoElectronico" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__SSolicitu__ID_Us__3F466844">
+          <End Role="SUsuarios" Type="Self.SUsuarios" Multiplicity="0..1" />
+          <End Role="SSolicitudes" Type="Self.SSolicitudes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SUsuarios">
+              <PropertyRef Name="Usuario_ID" />
+            </Principal>
+            <Dependent Role="SSolicitudes">
+              <PropertyRef Name="ID_Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SOLICITUDModelStoreContainer">
+          <EntitySet Name="SSolicitudes" EntityType="Self.SSolicitudes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SUsuarios" EntityType="Self.SUsuarios" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__SSolicitu__ID_Us__3F466844" Association="Self.FK__SSolicitu__ID_Us__3F466844">
+            <End Role="SUsuarios" EntitySet="SUsuarios" />
+            <End Role="SSolicitudes" EntitySet="SSolicitudes" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SOLICITUDModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="SSolicitudes">
+          <Key>
+            <PropertyRef Name="Solicitud_ID" />
+          </Key>
+          <Property Name="Solicitud_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FechaSolicitud" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="TipoSolicitud" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Estado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_Usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="SUsuarios" Relationship="Self.FK__SSolicitu__ID_Us__3F466844" FromRole="SSolicitudes" ToRole="SUsuarios" />
+        </EntityType>
+        <EntityType Name="SUsuarios">
+          <Key>
+            <PropertyRef Name="Usuario_ID" />
+          </Key>
+          <Property Name="Usuario_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Apellido" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="N_Identificación_Matricula" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Rol" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CorreoElectronico" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="SSolicitudes" Relationship="Self.FK__SSolicitu__ID_Us__3F466844" FromRole="SUsuarios" ToRole="SSolicitudes" />
+        </EntityType>
+        <Association Name="FK__SSolicitu__ID_Us__3F466844">
+          <End Role="SUsuarios" Type="Self.SUsuarios" Multiplicity="0..1" />
+          <End Role="SSolicitudes" Type="Self.SSolicitudes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SUsuarios">
+              <PropertyRef Name="Usuario_ID" />
+            </Principal>
+            <Dependent Role="SSolicitudes">
+              <PropertyRef Name="ID_Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SOLICITUDEntities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="SSolicitudes" EntityType="Self.SSolicitudes" />
+          <EntitySet Name="SUsuarios" EntityType="Self.SUsuarios" />
+          <AssociationSet Name="FK__SSolicitu__ID_Us__3F466844" Association="Self.FK__SSolicitu__ID_Us__3F466844">
+            <End Role="SUsuarios" EntitySet="SUsuarios" />
+            <End Role="SSolicitudes" EntitySet="SSolicitudes" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SOLICITUDModelStoreContainer" CdmEntityContainer="SOLICITUDEntities2">
+          <EntitySetMapping Name="SSolicitudes">
+            <EntityTypeMapping TypeName="SOLICITUDModel.SSolicitudes">
+              <MappingFragment StoreEntitySet="SSolicitudes">
+                <ScalarProperty Name="Solicitud_ID" ColumnName="Solicitud_ID" />
+                <ScalarProperty Name="FechaSolicitud" ColumnName="FechaSolicitud" />
+                <ScalarProperty Name="TipoSolicitud" ColumnName="TipoSolicitud" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="ID_Usuario" ColumnName="ID_Usuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SUsuarios">
+            <EntityTypeMapping TypeName="SOLICITUDModel.SUsuarios">
+              <MappingFragment StoreEntitySet="SUsuarios">
+                <ScalarProperty Name="Usuario_ID" ColumnName="Usuario_ID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="N_Identificación_Matricula" ColumnName="N_Identificación_Matricula" />
+                <ScalarProperty Name="Rol" ColumnName="Rol" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="CorreoElectronico" ColumnName="CorreoElectronico" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
